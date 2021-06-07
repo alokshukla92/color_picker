@@ -1,3 +1,5 @@
+"""pip install PIL, cv2, numpy before running the script """
+
 from tkinter import *
 from tkinter import filedialog
 import os
@@ -8,6 +10,9 @@ import numpy as np
 
 
 def click_event(event, x, y , flags, params):
+    """
+    Allows user to click on the image and displays the RGB value of that specific point.
+    """
     if event == cv2.EVENT_LBUTTONDOWN:
         blue = img[x, y, 0]
         green = img[x, y, 1]
@@ -20,7 +25,9 @@ def click_event(event, x, y , flags, params):
         root.update_idletasks()
 
 def show_values(file_name):
-    #img = np.zeros([521, 521, 3], np.uint8)
+    """
+    Opens a new window containing the image selected. 
+    """
     img1 = cv2.imread(file_name)
     global img
     img = cv2.resize(img1, (521, 521))
@@ -32,8 +39,11 @@ def show_values(file_name):
     cv2.destroyAllWindows()
 
 def showImage():
+    """
+    Displays the image of the thumbnail in a 350*350 frame. 
+    """
     fln = filedialog.askopenfilename(initialdir = os.getcwd(), title = 'Select Image File',
-                                      filetypes = (("All Files", "*.*"), ("png files", "*.png"), ("jpg files", "*.jpg")))
+                                      filetypes = (("All Files", "."), ("png files", ".png"), ("jpg files", ".jpg")))
     img = Image.open(fln)
     img.thumbnail((350, 350))
     img = ImageTk.PhotoImage(img)
@@ -44,7 +54,7 @@ def showImage():
 
 
 
-
+## UI Area
 root = Tk()
 
 frm = Frame(root)
@@ -66,26 +76,4 @@ text.pack(side = BOTTOM, pady = 10)
 root.title("Image Browser")
 root.geometry('400x400')
 
-
-
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
